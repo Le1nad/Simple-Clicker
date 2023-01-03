@@ -8,9 +8,11 @@ public class Panel extends JFrame{
     private JLabel countClicks;
     private JButton addClicks;
 
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     public Panel() {
-        super("Simple Clicker 1.0.0");
-        setBounds(100, 100, 300, 80);
+        super("Simple Clicker 1.0.1");
+        setBounds(screenSize.width/2, screenSize.height/2, screenSize.width/6, screenSize.height/12);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         countClicks = new JLabel("Clicks: " + clicks);
