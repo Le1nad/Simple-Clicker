@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Simple Clicker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Simple_Clicker_jar</output-path>
+    <root id="archive" name="Simple Clicker.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/res/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Simple Clicker" />
+    </root>
+  </artifact>
+</component>
