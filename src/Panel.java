@@ -3,40 +3,53 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Panel extends JFrame{
-    private int clicks = 0;
-    private JLabel countClicks;
+public class Panel extends JFrame {
+    public static int clicks = 0;
+    public JLabel countClicks;
     private JButton addClicks;
+    private JButton clicksShop;
 
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public Panel() {
-        super("Simple Clicker 1.0.1");
+        super("Simple Clicker 1.1.0");
         setBounds(screenSize.width/2, screenSize.height/2, screenSize.width/6, screenSize.height/12);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         countClicks = new JLabel("Clicks: " + clicks);
         addClicks = new JButton("Click me!");
+        clicksShop = new JButton("Shop");
 
         JPanel buttonsPanel = new JPanel(new FlowLayout());
         add(countClicks, BorderLayout.NORTH);
 
         buttonsPanel.add(addClicks);
+        buttonsPanel.add(clicksShop);
         add(buttonsPanel, BorderLayout.SOUTH);
 
-        clickAdder();
+        clickAction();
     }
 
-    private void clickAdder() {
+    private void clickAction() {
         addClicks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clicks = clicks + 1;
+
+                Shop shop = new Shop();
+                clicks = clicks + shop.clicksPower;
                 countUpdater();
             }
         });
+
+        clicksShop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Shop shop = new Shop();
+                shop.setVisible(true);
+            }
+        });
     }
-    private void countUpdater() {
+    public void countUpdater() {
         countClicks.setText("Clicks: " + clicks);
     }
 }
