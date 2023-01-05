@@ -33,7 +33,7 @@ public class Panel extends JFrame {
         ScheduledExecutorService countUpdater = Executors.newSingleThreadScheduledExecutor();
         countUpdater.scheduleWithFixedDelay(() -> {
             SwingUtilities.invokeLater(() -> countClicks.setText("Clicks: " + clicks));
-        }, 0, 1, TimeUnit.MICROSECONDS);
+        }, 0, 1, TimeUnit.MILLISECONDS);
 
         clickAction();
     }
