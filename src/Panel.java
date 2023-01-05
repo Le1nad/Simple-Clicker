@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Panel extends JFrame {
     public static int clicks = 0;
@@ -27,6 +30,11 @@ public class Panel extends JFrame {
         buttonsPanel.add(clicksShop);
         add(buttonsPanel, BorderLayout.SOUTH);
 
+        ScheduledExecutorService countUpdater = Executors.newSingleThreadScheduledExecutor();
+        countUpdater.scheduleWithFixedDelay(() -> {
+            SwingUtilities.invokeLater(() -> countClicks.setText("Clicks: " + clicks));
+        }, 0, 1, TimeUnit.MICROSECONDS);
+
         clickAction();
     }
 
@@ -34,10 +42,8 @@ public class Panel extends JFrame {
         addClicks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Shop shop = new Shop();
                 clicks = clicks + shop.clicksPower;
-                countUpdater();
             }
         });
 
@@ -48,8 +54,5 @@ public class Panel extends JFrame {
                 shop.setVisible(true);
             }
         });
-    }
-    public void countUpdater() {
-        countClicks.setText("Clicks: " + clicks);
     }
 }

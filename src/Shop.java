@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Shop extends JFrame {
-    public static int clicksPower = 1;
 
-    public JButton addClickPower;
+    public static int clicksPower = 1;
+    private static int clickPowerPriceIncrease = 10;
+
+    private JButton addClickPower;
 
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -16,26 +18,28 @@ public class Shop extends JFrame {
         setResizable(false);
         setBounds((screenSize.width/2)+50, (screenSize.height/2)+50, screenSize.width/6, screenSize.height/8);
 
-        addClickPower = new JButton("Add Click Power (+1) for 10 clicks");
+        addClickPower = new JButton("Add Click Power (+1) for " + clickPowerPriceIncrease + " clicks");
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.add(addClickPower);
-        add(buttonsPanel, BorderLayout.NORTH);
+        add(buttonsPanel);
 
-        clickPowerAdder();
+        clickUpgradeAdder();
     }
 
-    private void clickPowerAdder() {
+    private void clickUpgradeAdder() {
         addClickPower.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Panel panel = new Panel();
 
-                if (panel.clicks >= 10) {
-                    panel.clicks = panel.clicks - 10;
+                if (panel.clicks >= clickPowerPriceIncrease) {
+                    panel.clicks = panel.clicks - clickPowerPriceIncrease;
+
+                    clickPowerPriceIncrease = clickPowerPriceIncrease + 10;
                     clicksPower++;
 
-                    panel.countUpdater();
+                    addClickPower.setText("Add Click Power (+1) for " + clickPowerPriceIncrease + " clicks");
                 } else {
                     String message = "";
                     message += "Not enough Clicks!";
