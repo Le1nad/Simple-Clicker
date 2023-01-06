@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Panel extends JFrame {
     public static int clicks = 0;
+
     public JLabel countClicks;
     private JButton addClicks;
     private JButton clicksShop;
@@ -34,6 +35,15 @@ public class Panel extends JFrame {
         countUpdater.scheduleWithFixedDelay(() -> {
             SwingUtilities.invokeLater(() -> countClicks.setText("Clicks: " + clicks));
         }, 0, 1, TimeUnit.MILLISECONDS);
+
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        service.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                Shop shop = new Shop();
+                clicks = clicks + shop.autoClick;
+            }
+        }, 0, 1, TimeUnit.SECONDS);
 
         clickAction();
     }
