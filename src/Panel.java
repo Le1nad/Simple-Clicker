@@ -16,7 +16,7 @@ public class Panel extends JFrame {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public Panel() {
-        super("Simple Clicker 1.1.1");
+        super("Simple Clicker 1.1.2");
         setBounds(screenSize.width/2, screenSize.height/2, screenSize.width/6, screenSize.height/12);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
